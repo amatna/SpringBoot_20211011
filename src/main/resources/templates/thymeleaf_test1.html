@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>index 메인페이지</title>
+</head>
+<body>
+    <h1>안녕하세요!</h1>
+    <p th:text="${data1}"></p>
+    <a href="/">홈페이지 메인</a>
+    <span th:utext="${data1}">message</span>    <!-- th:utext: 1. 전달된 변수가 HTML로 해석  2. 텍스트 무시 -->
+
+    <input type="text" th:value="${data2}"> <!-- th:value는 type에 따라 다르게 작동 / text: 텍스트 값  checkbox: 선택되었을 때 서버로 전송되는 값 (기본값 "on") -->
+    <input type="checkbox" th:field="*{data2}" th:value="true"> 동의합니다. <!-- th:field: spring model 객체(컨트롤러와 뷰 간의 데이터 전달)의 data2 필드와 체크박스를 연결 -->
+
+    <p><a th:href="@{/posts/(id=${link})}">글 상세보기</a></p>
+    <div th:with="first=${name}">
+        <p>리스트에서 처음 사람의 이름 = <span th:text="${first}"></span></p>
+    </div>
+    <a th:href="@{/products/detail/(productId=${para1}, productId=${para2})}">상품 상세보기</a>
+</body>
+</html>
