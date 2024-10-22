@@ -125,12 +125,9 @@
 })(jQuery);
 
 function confirmClose() {
-    // 사용자에게 창을 닫을지 물어보는 confirm 창을 띄움
     if (confirm("정말 창을 닫으시겠습니까?")) {
-        // 확인 버튼을 누르면 창을 닫음
         window.close();
     } else {
-        // 취소 버튼을 누르면 아무 동작도 하지 않음
         return false;
     }
 }

@@ -51,6 +51,11 @@ public class DemoController
         TestDB test = testService.findByName("홍길동");
         model.addAttribute("data4", test);
         System.out.println("데이터 출력 디버그 : " + test);
+
+        TestDB test2 = testService.findByName("아저씨");
+        model.addAttribute("data4_2", test2);
+        TestDB test3 = testService.findByName("꾸러기");
+        model.addAttribute("data4_3", test3);
         return "testdb";
     }
 
