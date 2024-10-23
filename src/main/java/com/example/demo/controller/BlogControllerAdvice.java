@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 
 public class BlogControllerAdvice {
-    @ExceptionHandler(Exception.class)
-    public String handleGenericException(Exception ex) {
+    @ExceptionHandler()
+    public String blogControllerAdvice(Exception ex) {
         return "error_page/article_error";
     }
 }
