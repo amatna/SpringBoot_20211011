@@ -39,17 +39,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="article : ${articles}">
-                        <td th:text="${article.id}"></td>
-                        <td th:text="${article.title}"></td>
-                        <td th:text="${article.content}"></td>
-                        <td>
-                            <!-- 수정 버튼 -->
-                            <a class="btn btn-warning" th:href="@{/article_edit/{id}(id=${article.id})}">수정</a>
-                            <!-- 삭제 버튼 -->
-                            <a class="btn btn-warning" th:href="@{/article_edit/{id}(id=${article.id})}">삭제</a>
-                        </td>
-                    </tr>
+                    <td th:text="${article.id}"></td>
+                    <td th:text="${article.title}"></td>
+                    <td th:text="${article.content}"></td>
                 </tbody>
             </table>
         </div>

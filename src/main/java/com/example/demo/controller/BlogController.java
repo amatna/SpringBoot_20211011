@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,7 +39,7 @@ public class BlogController {
             model.addAttribute("article", list.get()); // 존재하면 Article 객체를 모델에 추가
         } else {
             // 처리할 로직 추가 (예: 오류 페이지로 리다이렉트, 예외 처리 등)
-            return "error"; // 오류 처리 페이지로 연결
+            return "/error_page/article_error"; // 오류 처리 페이지로 연결(이름 수정됨)
         }
         return "article_edit"; // .HTML 연결
     }
@@ -51,6 +53,12 @@ public class BlogController {
     @PostMapping("/api/articles")
     public String addArticle(@ModelAttribute AddArticleRequest request) {
         Article saveArticle = blogService.save(request);
+        return "redirect:/article_list";
+    }
+
+    @DeleteMapping("/api/article_delete/{id}")
+    public String deleteArticle(@PathVariable Long id) {
+        blogService.delete(id);
         return "redirect:/article_list";
     }
 }

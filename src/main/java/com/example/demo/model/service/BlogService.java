@@ -1,6 +1,5 @@
 package com.example.demo.model.service;
 
-import java.util.List;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +37,9 @@ public class BlogService {
         article.update(request.getTitle(), request.getContent()); // 값을 수정
         blogRepository.save(article); // Article 객체에 저장
         });
+    }
+
+    public void delete(Long id) {
+        blogRepository.deleteById(id);
     }
 }
