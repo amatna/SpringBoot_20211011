@@ -22,7 +22,7 @@ public class DemoController
 
     @GetMapping("/hello2")
     public String hello2(Model model) {
-        model.addAttribute("data2", "홍길동님.");
+        model.addAttribute("data1", "홍길동님.");
         model.addAttribute("data2", "방갑습니다.");
         model.addAttribute("data3", "오늘.");
         model.addAttribute("data4", "날씨는.");
