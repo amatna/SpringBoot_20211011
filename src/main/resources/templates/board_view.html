@@ -19,13 +19,19 @@
                     <tr>
                         <th>ID</th>
                         <th>제목</th>
-                        <th>내용</th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                        <th>조회수</th>
+                        <th>좋아요</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <td th:text="${article.id}"></td>
-                    <td th:text="${article.title}"></td>
-                    <td th:text="${article.content}"></td>
+                    <td th:text="${boards.id}"></td>
+                    <td th:text="${boards.title}"></td>
+                    <td th:text="${boards.user}"></td>
+                    <td th:text="${boards.newdate}"></td>
+                    <td th:text="${boards.count}"></td>
+                    <td th:text="${boards.likec}"></td>
                 </tbody>
             </table>
         </div>

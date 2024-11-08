@@ -57,4 +57,16 @@ public class BlogService {
     public Optional<Board> findById(Long id) { // 게시판 특정 글 조회
         return blogRepository.findById(id);
     }
+
+    public void update(Long id, AddArticleRequest request) {
+        Optional<Board> optionalBoard = blogRepository.findById(id);
+        optionalBoard.ifPresent(boards -> {
+        boards.update(request.getTitle(), request.getContent(), boards.getUser(), boards.getNewdate(), boards.getCount(), boards.getLikec());
+        blogRepository.save(boards);
+        });
+    }
+
+    public void delete(Long id) {
+        blogRepository.deleteById(id);
+    }
 }

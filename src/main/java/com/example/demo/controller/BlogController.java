@@ -83,4 +83,27 @@ public class BlogController {
         }
         return "board_view"; // .HTML 연결
     }
+
+    @GetMapping("/board_edit/{id}")
+    public String board_edit(Model model, @PathVariable Long id){
+        Optional<Board> list = blogService.findById(id);
+        if (list.isPresent()) {
+            model.addAttribute("boards", list.get());
+        } else {
+            return "/error_page/article_error";
+        }
+        return "board_edit";
+    }
+
+    @PutMapping("/api/board_edit/{id}")
+    public String updateBoard(@PathVariable Long id, @ModelAttribute AddArticleRequest request) {
+        blogService.update(id, request);
+        return "redirect:/board_list";
+    }
+
+    @DeleteMapping("/api/board_delete/{id}")
+    public String deleteBoard(@PathVariable Long id) {
+        blogService.delete(id);
+        return "redirect:/board_list";
+    }
 }
