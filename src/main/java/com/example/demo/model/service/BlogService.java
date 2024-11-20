@@ -3,6 +3,8 @@ package com.example.demo.model.service;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import com.example.demo.model.domain.Article;
 import com.example.demo.model.domain.Board;
 import com.example.demo.model.repository.BlogRepository;
@@ -69,4 +71,17 @@ public class BlogService {
     public void delete(Long id) {
         blogRepository.deleteById(id);
     }
+
+    public Board save(AddArticleRequest request) {
+        // DTO가 없는 경우 이곳에 직접 구현 가능
+        return blogRepository.save(request.toEntity());
+    }
+
+    public Page<Board> findAll(Pageable pageable) {
+        return blogRepository.findAll(pageable);
+    }
+
+    public Page<Board> searchByKeyword(String keyword, Pageable pageable) {
+        return blogRepository.findByTitleContainingIgnoreCase(keyword, pageable);
+    } // LIKE 검색 제공(대소문자 무시)
 }
