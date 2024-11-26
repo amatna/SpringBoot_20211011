@@ -5,6 +5,8 @@ import lombok.*; // 어노테이션 자동 생성
 import com.example.demo.model.domain.Member;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -14,15 +16,19 @@ import jakarta.validation.constraints.Size;
 @Data // getter, setter, toString, equals 등 자동 생성
 
 public class AddMemberRequest {
-    @NotBlank // 없어도 되는지 확인
-    @Pattern(regexp = "^[가-힣a-zA-Z]*$", message = "한글과 영어만 가능")
+    @NotBlank
+    @Pattern(regexp = "^[가-힣a-zA-Z]*$", message = "한글, 영어만 가능합니다.")
     private String name;
     @NotBlank
     @Email
     private String email;
-    @Size(min = 8, message = "8글자 이상만 가능")
-    @Pattern(regexp = "^[a-zA-Z]*$", message = "숫자, 영어만 가능")
+    @Size(min = 8, message = "8글자 이상이여야 합니다.")
+    @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "영어, 숫자만 가능합니다.")
     private String password;
+
+    @Min(value = 19, message = "19세 이상만 가능합니다.")
+    @Max(value = 90, message = "90세 이하만 가능합니다.")
+    @Pattern(regexp = "^[0-9]*$", message = "숫자만 가능합니다.")
     private String age;
     private String mobile;
     private String address;

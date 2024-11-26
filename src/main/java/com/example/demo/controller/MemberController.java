@@ -6,10 +6,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import jakarta.validation.Valid;
 
 import com.example.demo.model.service.AddMemberRequest;
 import com.example.demo.model.service.MemberService;
-import com.example.demo.model.domain.Member;;
+import com.example.demo.model.domain.Member;
 
 @Controller
 public class MemberController {
@@ -22,9 +23,9 @@ public class MemberController {
     }
 
     @PostMapping("/api/members") // 회원 가입 저장
-    public String addmembers(@ModelAttribute AddMemberRequest request) {
+    public String addmembers(@Valid @ModelAttribute AddMemberRequest request) {
         memberService.saveMember(request);
-        return "join_end"; // .HTML 연결
+        return "redirect:/join_end"; // .HTML 연결
     }
 
     @GetMapping("/member_login") // 로그인 페이지 연결
@@ -42,5 +43,10 @@ public class MemberController {
             model.addAttribute("error", e.getMessage()); // 에러 메시지 전달
             return "member_login"; // 로그인 실패 시 로그인 페이지로 리다이렉트
         }
+    }
+
+    @GetMapping("/join_end")
+    public String join_end() {
+        return "join_end";
     }
 }
