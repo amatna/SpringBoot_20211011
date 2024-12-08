@@ -1,3 +1,9 @@
+
+
+
+
+
+
 **domain**
 엔티티(Entity) / 데이터베이스 테이블
 
@@ -7,6 +13,15 @@
 
 @Entity
 * JPA가 해당 클래스를 기반으로 데이터베이스를 관리
+
+@Table(name = "board")
+* 테이블 이름을 지정 / 안하면 클래스 이름으로 자동설정
+
+@@NoArgsConstructor(access = AccessLevel.PROTECTED)
+* 외부 생성자 접근 방지
+
+@id
+* 기본 키로 사용
 
 
 ---
