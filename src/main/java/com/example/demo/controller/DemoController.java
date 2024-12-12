@@ -58,9 +58,4 @@ public class DemoController
         model.addAttribute("data4_3", test3);
         return "testdb";
     }
-
-    // @GetMapping("/article_list")
-    // public String article_list() {
-    //     return "article_list";
-    // }
 }

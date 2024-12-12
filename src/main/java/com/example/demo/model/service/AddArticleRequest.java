@@ -25,11 +25,4 @@ public class AddArticleRequest {
                 .likec(likec)
                 .build();
     }
-
-    // public Article toEntity() { // Article 객체 생성
-    //     return Article.builder()
-    //             .title(title)
-    //             .content(content)
-    //             .build();
-    // }
 }
