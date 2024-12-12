@@ -1,3 +1,8 @@
+**JPA Repository**  
+* JPA는 Commons 를 제외한 기본 기능 (SpringDataCommons: Repositiry, CrudRepository, PaingAndSortingRepository)
+* 순수 JPA 에 비해 코드 최소화, RDB 최적화
+* CRUD 를 통해 표준 메소드를 미리 구현해 둠
+* 
 
 
 
