@@ -57,6 +57,7 @@ public class MemberController {
             String sessionId = UUID.randomUUID().toString(); // 임의의 고유 ID로 세션 생성
             String email = request.getEmail(); // 이메일 얻기
             session.setAttribute("userId", sessionId); // 아이디 이름 설정
+            //session.setAttribute("userId:" + email, sessionId); // 사용자마다 다른 키로 세션 설정
             session.setAttribute("email", email); // 이메일 설정
 
             model.addAttribute("member", member); // 로그인 성공 시 회원 정보 전달
@@ -76,7 +77,7 @@ public class MemberController {
     public String member_logout(Model model, HttpServletRequest request2, HttpServletResponse response) {
         try {
             HttpSession session = request2.getSession(false); // 기존 세션 가져오기(존재하지 않으면 null 반환)
-            session.invalidate(); // 기존 세션 무효화
+            //session.invalidate(); // 기존 세션 무효화
             Cookie cookie = new Cookie("JSESSIONID", null); // JSESSIONID is the default session cookie name
             cookie.setPath("/"); // Set the path for the cookie
             cookie.setMaxAge(0); // Set cookie expiration to 0 (removes the cookie)
@@ -85,7 +86,7 @@ public class MemberController {
             System.out.println("세션 userId: " + session.getAttribute("userId")); // 초기화 후 IDE 터미널에 세션 값 출력
             return "redirect:/member_login"; // 로그인 페이지로 리다이렉트
         } catch (IllegalArgumentException e) {
-            model.addAttribute("error", e.getMessage()); // 에러 메시지 전달
+            model.addAttribute( "error", e.getMessage()); // 에러 메시지 전달
             return "redirect:/member_login"; // 로그인 실패 시 로그인 페이지로 리다이렉트
         }
     }

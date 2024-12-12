@@ -48,7 +48,7 @@
             </tbody>
         </table>
         <tr th:each="board : ${boards}">
-            <td th:if="${boards.user == email}">
+            <td th:if="${boards.user == email}"> <!-- 받은 attribute(boards.user)와 글의 작성자가 같을 경우 -->
                 <!-- 수정 버튼 -->
                 <a class="btn btn-warning" th:href="@{/board_edit/{id}(id=${board.id})}">수정</a>
                 <!-- 삭제 버튼 -->

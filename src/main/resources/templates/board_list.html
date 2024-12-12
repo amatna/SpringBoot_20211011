@@ -40,7 +40,7 @@
                 </thead>
                 <tbody>
                     <tr th:each="board : ${boards}">
-                        <td th:text="${startNum + boardStat.index}"></td>
+                        <td th:text="${startNum + boardStat.index}"></td> <!-- index: +0 +1 +2 count: 1부터 시작 -->
                         <td>
                             <a th:href="@{/board_view/{id}(id=${board.id})}">
                                 <span th:text="${board.title}"></span>

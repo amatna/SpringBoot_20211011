@@ -63,6 +63,7 @@ public class BlogService {
     public void update(Long id, AddArticleRequest request) {
         Optional<Board> optionalBoard = blogRepository.findById(id);
         optionalBoard.ifPresent(boards -> {
+        // 제목, 내용만 입력 받은걸로 교체
         boards.update(request.getTitle(), request.getContent(), boards.getUser(), boards.getNewdate(), boards.getCount(), boards.getLikec());
         blogRepository.save(boards);
         });
