@@ -184,19 +184,19 @@
     * return http.build();    // http: HttpSecurity 파라미터
   * 암호화 설정
     * return new BCryptPasswordEncoder();    // 비밀번호 암호화 저장
-  * @Transactional
-    * 클래스 내 모든 메서드의 데이터베이스 작업을 하나의 트랜잭션(하나로 묶어)으로 처리
-  * @RequiredArgsConstructor
-    * final이나 @NonNull이 붙은 필드에 자동으로 생성자를 생성
-  * @Value
-    * 프로퍼티 파일의 값을 Bean에 주입
-  * @RequestParam(“email”) String email
-    * http 요청 파라미터에서 “email” 값을 추가
-  * @NotBlank
-    * null, 빈문자열, 공백 모두 허용하지 않음
-  * @Pattern
-    * 임의로 조건을 지정
-    * regexp = "^[가-힣a-zA-Z]*$" // 한글, 영어 대소문자만 가능
+* @Transactional
+  * 클래스 내 모든 메서드의 데이터베이스 작업을 하나의 트랜잭션(하나로 묶어)으로 처리
+* @RequiredArgsConstructor
+  * final이나 @NonNull이 붙은 필드에 자동으로 생성자를 생성
+* @Value
+  * 프로퍼티 파일의 값을 Bean에 주입
+* @RequestParam(“email”) String email
+  * http 요청 파라미터에서 “email” 값을 추가
+* @NotBlank
+  * null, 빈문자열, 공백 모두 허용하지 않음
+* @Pattern
+  * 임의로 조건을 지정
+  * regexp = "^[가-힣a-zA-Z]*$" // 한글, 영어 대소문자만 가능
 <br/>
 
 Path uploadPath = Paths.get(uploadFolder).toAbsolutePath();
