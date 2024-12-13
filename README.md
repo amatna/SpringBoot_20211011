@@ -102,7 +102,7 @@
 ---
 <br/>
 
-**Controller**
+**Controller - 사용자 요청을 처리하고 응답을 반환**
 * 파라미터
   * Model
     * model.addAttribute("HTML에서읽을이름", 보낼값)
@@ -147,6 +147,66 @@
 
 **@Repository - 데이터베이스를 CRUD**
 * public interface MemberRepository extends JpaRepository<domain클래스, Long>
+  * JpaRepository로 CRUD
+ <br>
+ 
+**service - 실제 동작을 설계 및 처리**
+* public List findAll() {  return repository변수.findAll(); }
+  * 도메인 데이터베이스에 입력된 모든 행을 가져옴
+* public Optional findById(Long id) { return repository.findById(id); }
+  * 데이터베이스의 id를 가져옴
+* public domain클래스 save(AddArticleRequest request) { return repository변수.save(request.toEntity()); }
+  * DTO 변수를 엔티티로 변환시키고 그것을 domain클래스 데이터베이스에 저장
+* public Page<domain클래스> searchByKeyword(String keyword, Pageable pageable) { return repository변수.findByTitleContainingIgnoreCase(keyword, pageable); }
+  * like 검색 제공(%문자열%)
+  * 대소문자 무시(IgnoreCase 빼면 허용)
+  * title 필드에 keyword가 포함된 게시물을 대소문자 구분 없이 검색하고, pageable 파라미터로 전달된 페이징 정보를 적용하여 결과를 페이징 처리하여 반환
+  * 커스텀 쿼리 메서드라 따로 리포지토리에 선언해줘야 함
+* validateDuplicateMember(DTO파라미터)
+  * 중복 확인
+* String encodedPassword = passwordEncoder.encode(DTO파라미터.getPassword());
+  * getPassword(): 사용자가 입력한 비밀번호를 DTO파라미터 객체에서 가져옴
+  * passwordEncoder.encode(): 비밀번호를 암호화
+* if (!passwordEncoder.matches(rawPassword, member.getPassword()))
+  * 입력된 비밀번호(rawPassword)와 저장된 암호화된비밀번호(member.getPassword())가 일치하는지 확인(matches)
+ <br/>
 
-**service**
-실제 동작을 설계 및 처리
+**Config**
+* SecurityConfig
+  * 스프링에서 보안 관리 클래스
+<br/>
+
+**@(어노테이션)**
+* @configuration
+  * 스프링 설정 클래스임을 지정, 등록된 Bean 생성 시점
+* @Bean
+  * 명시적 의존성 주입
+    * return http.build();    // http: HttpSecurity 파라미터
+  * 암호화 설정
+    * return new BCryptPasswordEncoder();    // 비밀번호 암호화 저장
+  * @Transactional
+    * 클래스 내 모든 메서드의 데이터베이스 작업을 하나의 트랜잭션(하나로 묶어)으로 처리
+  * @RequiredArgsConstructor
+    * final이나 @NonNull이 붙은 필드에 자동으로 생성자를 생성
+  * @Value
+    * 프로퍼티 파일의 값을 Bean에 주입
+  * @RequestParam(“email”) String email
+    * http 요청 파라미터에서 “email” 값을 추가
+  * @NotBlank
+    * null, 빈문자열, 공백 모두 허용하지 않음
+  * @Pattern
+    * 임의로 조건을 지정
+    * regexp = "^[가-힣a-zA-Z]*$" // 한글, 영어 대소문자만 가능
+<br/>
+
+Path uploadPath = Paths.get(uploadFolder).toAbsolutePath();
+* uploadFolder 경로를 Path 객체로 변환한 후, 이를 절대 경로로 변환하여 uploadPath에 저장
+<br/>
+
+Files.createDirectories(uploadPath);
+* 지정된 경로(uploadPath)에 디렉토리가 존재하지 않으면 새로 생성
+<br/>
+
+server.servlet.session.timeout=300s: 세션의 유효 시간
+<br/>
+server.servlet.session.cookie.secure=true: HTTPS 연결에서만 세션 쿠키를 전송(보안 강화)
